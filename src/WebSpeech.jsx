@@ -8,10 +8,9 @@ mic.continuous = true
 mic.interimResults = true
 mic.lang = 'en-US'
 
-const  WebSpeech = () => {
+const  WebSpeech = ({setSavedNotes, savedNotes}) => {
   const [isListening, setIsListening] = useState(false);
   const [note, setNote] = useState(false);
-  const [savedNotes, setSavedNotes] = useState([]);
 
   useEffect(()=> {
     handleListen()
@@ -50,26 +49,29 @@ const  WebSpeech = () => {
   }
 
   return (
-    <div className='container'>
-      <div className="box">
-        <h2>Current Note</h2>
-        {isListening? <span>:mic</span> : <span>STOP</span>}
-        <button onClick={handleSaveNote} disabled={!note}>
-          Save Note
-        </button>
-        <button onClick={() => setIsListening(prevState => !prevState)}>
-          Start/Stop
-        </button>
-        <p>{note}</p>
+    <>
+      <h1>Voice Notes</h1>
+      <div className="container">
+        <div className="box">
+          <h2>Current Note</h2>
+          {isListening ? <span>🎙️</span> : <span>🛑🎙️</span>}
+          <button onClick={() => setIsListening(prevState => !prevState)}>
+            Start/Stop
+          </button>
+          <button onClick={handleSaveNote} disabled={!note}>
+            Save Note
+          </button>
+          <p>{note}</p>
+        </div>
+        <div className="box">
+          <h2>Notes</h2>
+          {savedNotes.map(n => (
+            <p key={n}>{n}</p>
+          ))}
+        </div>
       </div>
-      <div className="box">
-        <h2>Notes</h2>
-        {savedNotes.map(n => (
-          <p key={n}>{n}</p>
-        ))}
-      </div>
-    </div>
-  );
+    </>
+  )
 }
 
 export default WebSpeech;
