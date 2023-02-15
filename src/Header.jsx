@@ -10,7 +10,7 @@ const Header = ({modeCheck, setmodeCheck}) => {
     return (
         <div className="header">
             <div className="header__left">
-                <button className='header__left'>
+                <button className='header__left--button'>
                     Play Button
                 </button>
                 <div>Native</div>    

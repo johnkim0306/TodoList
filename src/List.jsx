@@ -1,11 +1,14 @@
 import React from 'react'
 
-const List = ({todos}) => {
-    const todoList = todos.map(todo => <li>{todo}</li>)
+const List = ({todo}) => {
     return (
-        <ul>
-            {todoList}
-        </ul>
+        <li>
+            <div>
+                <input type="checkbox" />
+                <p>{todo}</p>
+            </div>
+        </li>
+
     )
 }
 

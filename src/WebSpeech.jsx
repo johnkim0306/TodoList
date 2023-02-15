@@ -10,7 +10,7 @@ mic.lang = 'en-US'
 
 const  WebSpeech = ({setSavedNotes, savedNotes}) => {
   const [isListening, setIsListening] = useState(false);
-  const [note, setNote] = useState(false);
+  const [note, setNote] = useState(null);
 
   useEffect(()=> {
     handleListen()
@@ -65,9 +65,11 @@ const  WebSpeech = ({setSavedNotes, savedNotes}) => {
         </div>
         <div className="box">
           <h2>Notes</h2>
-          {savedNotes.map(n => (
-            <p key={n}>{n}</p>
-          ))}
+          <ul>
+            {savedNotes.map((n, index) => (
+              <li key={index}>{n}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </>

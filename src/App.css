@@ -9,3 +9,12 @@
   justify-content: space-evenly;
 }
 
+.app__left {
+  flex: 5;
+}
+
+.app__right {
+  flex: 5
+}
+
+

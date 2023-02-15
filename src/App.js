@@ -19,8 +19,14 @@ const App = () => {
   return (
     <div className='App'>
       <Header modeCheck={modeCheck} setmodeCheck={setmodeCheck} />
-      {modeCheck ? <WebSpeech savedNotes={savedNotes} setSavedNotes={setSavedNotes} /> : <WebText />}
-      <Todo />
+      <div className="container">
+        <div className="app__left">
+          {modeCheck ? <WebSpeech savedNotes={savedNotes} setSavedNotes={setSavedNotes} /> : <WebText savedNotes={savedNotes} setSavedNotes={setSavedNotes} />}
+        </div>
+        <div className="app__right">
+          <Todo />
+        </div>
+      </div>
     </div>
   )
 }

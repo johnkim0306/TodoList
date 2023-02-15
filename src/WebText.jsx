@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const synth = window.speechSynthesis;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -8,20 +8,37 @@ recognition.continuous = true
 recognition.interimResults = true
 recognition.lang = 'en-US'
 
-const WebText = () => {
+const WebText = ({setSavedNotes, savedNotes}) => {
   const [text, setText] = useState('Hello, how are you?');
 
+
   const handleClick = () => {
+    if (text.trim() === '') {
+      return;
+    }
     const speech = new SpeechSynthesisUtterance(text);
-    speech.lang = 'ja-JP'
+    speech.lang = 'ja-JP';
     synth.speak(speech, true);
+
+    setSavedNotes((prevNotes) => [...prevNotes, text]);
+    setText('');
   };
 
   return (
     <div>
-      <h1>Speech Synthesis</h1>
-      <input type="text" value={text} onChange={(event) => setText(event.target.value)} />
-      <button onClick={handleClick}>Speak</button>
+      <div className="box">
+        <h1>Speech Synthesis</h1>
+        <input type="text" value={text} onChange={(event) => setText(event.target.value)} />
+        <button onClick={handleClick} >Speak</button>
+      </div>
+      <div className="box">
+        <h2>Notes</h2>
+        <ul>
+          {savedNotes.map((n, index) => (
+            <li key={index}>{n}</li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
