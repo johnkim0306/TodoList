@@ -18,9 +18,18 @@ code {
   margin: 30px;
   padding: 20px;
   border-radius: 5px;
+  width: 100%;
 }
 
+.web__container {
+  display: flex;
+}
 
+ul {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
 .container {
   max-width: 960px;
@@ -31,7 +40,7 @@ code {
 }
 
 .white-mode {
-  background-color: white;
+  background-color: rgb(255 253 253);
 }
 
 .white-mode h1 {
@@ -71,14 +80,15 @@ textarea:focus {
   outline: none;
 }
 
-.save {
+.header__button {
   background-color: #e1e1e1;
   border: none;
   border-radius: 15px;
   padding: 5px 10px 5px 10px;
+  margin: .5em;
 }
 
-.save:hover {
+.header__button:hover {
   background-color: #ededed;
   cursor: pointer;
 }
@@ -110,4 +120,9 @@ textarea:focus {
 
 .search input:focus {
   outline: none;
+}
+
+.list {
+  display: flex;
+  align-items: center;
 }

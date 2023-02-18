@@ -4,7 +4,7 @@ import List from './List.jsx';
 import { AiOutlinePlus } from 'react-icons/ai';
 import { FaRegTrashAlt } from 'react-icons/fa';
 
-const Todo = () => {
+const Todo = ({handleDeleteNote}) => {
     const [todos, setTodos] = useState(['test', 'testing2']);
     const [newTodo, setNewTodo] = useState();
     
@@ -29,7 +29,7 @@ const Todo = () => {
             </form>
             <ul>
                 {todos.map((todo) => (
-                <List key={todo.id} todo={todo} />
+                    <List key={todo.id} id={todo.id} text={todo.text} date={todo.date} handleDeleteNote={handleDeleteNote} />
                 ))}
             </ul>
             <p>You have {todos.length} todos</p>

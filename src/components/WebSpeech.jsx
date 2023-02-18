@@ -1,5 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { nanoid } from 'nanoid';
+import List from './List';
+
 
 //const synth = window.speechSynthesis;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -8,7 +10,7 @@ mic.continuous = true
 mic.interimResults = true
 mic.lang = 'en-US'
 
-const  WebSpeech = ({setSavedNotes, savedNotes}) => {
+const  WebSpeech = ({setSavedNotes, savedNotes, handleDeleteNote}) => {
   const [isListening, setIsListening] = useState(false);
   const [note, setNote] = useState('');
 
@@ -53,7 +55,7 @@ const  WebSpeech = ({setSavedNotes, savedNotes}) => {
   return (
     <>
       <h1>Voice Notes</h1>
-      <div className="container">
+      <div className="web__container">
         <div className="box">
           <h2>Current Note</h2>
           {isListening ? <span>🎙️</span> : <span>🛑🎙️</span>}
@@ -68,8 +70,8 @@ const  WebSpeech = ({setSavedNotes, savedNotes}) => {
         <div className="box">
           <h2>Notes</h2>
           <ul>
-            {savedNotes.map(note => (
-              <li key={note.id}>{note.text}</li>
+            {savedNotes.map(todo => (
+              <List key={todo.id} id={todo.id} text={todo.text} date={todo.date} handleDeleteNote={handleDeleteNote} />
             ))}
           </ul>
         </div>

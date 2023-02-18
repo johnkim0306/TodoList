@@ -8,8 +8,9 @@
   display: flex;
 }
 
-.app__left {
+.app__bottom {
   flex: 5;
+  width: 100%;
 }
 
 .app__right {

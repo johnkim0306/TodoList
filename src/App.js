@@ -56,14 +56,13 @@ const App = () => {
   }, []);
 
   return (
-    <div className={whiteMode ? 'dark-mode' : 'App'}>
+    <div className={whiteMode ? 'white-mode' : 'App'}>
       <div className="container">
         <Header modeCheck={modeCheck} setmodeCheck={setmodeCheck} handleTogglewhiteMode={setwhiteMode} />
         <Search handleSearchNote={setSearchText}/>
         <NotesList savedNotes={savedNotes.filter((note)=> note.text.toLocaleLowerCase().includes(searchText))} handleAddNote={addNote} handleDeleteNote={deleteNote} />
         <div className="app__container">
-          <div className="app__left">{modeCheck ? <WebSpeech savedNotes={savedNotes} setSavedNotes={setSavedNotes} /> : <WebText savedNotes={savedNotes} setSavedNotes={setSavedNotes} />}</div>
-
+          <div className="app__bottom">{modeCheck ? <WebSpeech savedNotes={savedNotes} setSavedNotes={setSavedNotes} handleDeleteNote={deleteNote} /> : <WebText savedNotes={savedNotes} setSavedNotes={setSavedNotes} handleDeleteNote={deleteNote} />}</div>
         </div>
       </div>
     </div>
