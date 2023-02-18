@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { nanoid } from 'nanoid';
 
-const synth = window.speechSynthesis;
+//const synth = window.speechSynthesis;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const mic = new SpeechRecognition();
-
 mic.continuous = true
 mic.interimResults = true
 mic.lang = 'en-US'
@@ -17,7 +16,7 @@ const  WebSpeech = ({setSavedNotes, savedNotes}) => {
     handleListen()
   }, [isListening])
 
-  const handleListen = () => {
+  const handleListen = useCallback(() => {
     if(isListening) {
       mic.start()
       mic.onend = () => {
@@ -32,7 +31,7 @@ const  WebSpeech = ({setSavedNotes, savedNotes}) => {
     }
     mic.onstart = () => {
       console.log('Mics on')
-    }
+    };
 
     mic.onresult = event => {
       const transcript = Array.from(event.results).map(result => result[0]).map(result => result.transcript).join('')
@@ -40,17 +39,16 @@ const  WebSpeech = ({setSavedNotes, savedNotes}) => {
       setNote(transcript)
       mic.onerror = event => {
         console.log(event.error)
-      }
-    }
-  };
+      };
+    };
+  }, [isListening]);
 
-  const handleSaveNote = () => {
+  const handleSaveNote = useCallback(() => {
     const currentDate = new Date().toLocaleString();
     const newNote = { id: nanoid(), text: note, date: currentDate };
-    console.log(note);
-    setSavedNotes([...savedNotes, newNote])
-    setNote('')
-  }
+    setSavedNotes(prevSavedNotes => [...prevSavedNotes, newNote]);
+    setNote('');
+  }, [note, setSavedNotes])
 
   return (
     <>
@@ -60,7 +58,7 @@ const  WebSpeech = ({setSavedNotes, savedNotes}) => {
           <h2>Current Note</h2>
           {isListening ? <span>🎙️</span> : <span>🛑🎙️</span>}
           <button onClick={() => setIsListening(prevState => !prevState)}>
-            Start/Stop
+            {isListening ? 'Stop' : 'Start'}
           </button>
           <button onClick={handleSaveNote} disabled={!note}>
             Save Note
@@ -70,8 +68,8 @@ const  WebSpeech = ({setSavedNotes, savedNotes}) => {
         <div className="box">
           <h2>Notes</h2>
           <ul>
-            {savedNotes.map((n, index) => (
-              <li key={index}>{n.text}</li>
+            {savedNotes.map(note => (
+              <li key={note.id}>{note.text}</li>
             ))}
           </ul>
         </div>

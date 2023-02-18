@@ -36,12 +36,7 @@ const App = () => {
   }
 
   const addNote = (text) => {
-    const currentDate = new Date().toLocaleString();
-    const newNote = {
-      id: nanoid(),
-      text,
-      date: currentDate
-    }
+    const newNote = { id: nanoid(), text, date: `${new Date().toLocaleString()}` }
     setSavedNotes([...savedNotes, newNote])
   }
 
@@ -62,15 +57,13 @@ const App = () => {
 
   return (
     <div className={whiteMode ? 'dark-mode' : 'App'}>
-      <Header modeCheck={modeCheck} setmodeCheck={setmodeCheck} handleTogglewhiteMode={setwhiteMode} />
       <div className="container">
+        <Header modeCheck={modeCheck} setmodeCheck={setmodeCheck} handleTogglewhiteMode={setwhiteMode} />
         <Search handleSearchNote={setSearchText}/>
         <NotesList savedNotes={savedNotes.filter((note)=> note.text.toLocaleLowerCase().includes(searchText))} handleAddNote={addNote} handleDeleteNote={deleteNote} />
-        <div className="container">
+        <div className="app__container">
           <div className="app__left">{modeCheck ? <WebSpeech savedNotes={savedNotes} setSavedNotes={setSavedNotes} /> : <WebText savedNotes={savedNotes} setSavedNotes={setSavedNotes} />}</div>
-          <div className="app__right">
-            <Todo />
-          </div>
+
         </div>
       </div>
     </div>

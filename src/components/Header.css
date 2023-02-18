@@ -12,3 +12,7 @@
   align-items: center;
   margin: 1rem;
 }
+
+.header__left--name{
+  font-size: 2rem;
+}

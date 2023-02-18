@@ -10,18 +10,11 @@ const Header = ({modeCheck, setmodeCheck, handleTogglewhiteMode}) => {
     return (
         <div className="header">
             <div className="header__left">
-                <div>Notes</div>
+                <div className='header__left--name'>Notes</div>
                 <button className='header__left--button'>Play Button</button>
-                <button onClick={()=> 
-                    handleTogglewhiteMode(
-                        (previousWhiteMode) => !previousWhiteMode
-                    )
-                    }
-                    className="save"
-                >
-                    Toggle Mode</button>    
             </div>
             <div className="header__right">
+                <button onClick={()=> handleTogglewhiteMode((previousWhiteMode) => !previousWhiteMode)}className="save">Toggle Mode</button>    
                 <button onClick={handleSaveNote} className='header__right'>
                     {ModeValue[modeCheck ? 1: 0]}
                 </button>
