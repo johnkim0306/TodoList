@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.css'
 
-const Header = ({modeCheck, setmodeCheck}) => {
+const Header = ({modeCheck, setmodeCheck, handleTogglewhiteMode}) => {
     let ModeValue = ['Listening Mode', 'Speaking Mode']
     const handleSaveNote = () => {
         setmodeCheck((prev)  => !prev)
@@ -10,10 +10,16 @@ const Header = ({modeCheck, setmodeCheck}) => {
     return (
         <div className="header">
             <div className="header__left">
-                <button className='header__left--button'>
-                    Play Button
-                </button>
-                <div>Native</div>    
+                <div>Notes</div>
+                <button className='header__left--button'>Play Button</button>
+                <button onClick={()=> 
+                    handleTogglewhiteMode(
+                        (previousWhiteMode) => !previousWhiteMode
+                    )
+                    }
+                    className="save"
+                >
+                    Toggle Mode</button>    
             </div>
             <div className="header__right">
                 <button onClick={handleSaveNote} className='header__right'>

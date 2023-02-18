@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
 
 const synth = window.speechSynthesis;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -19,8 +20,9 @@ const WebText = ({setSavedNotes, savedNotes}) => {
     const speech = new SpeechSynthesisUtterance(text);
     speech.lang = 'ja-JP';
     synth.speak(speech, true);
-
-    setSavedNotes((prevNotes) => [...prevNotes, text]);
+    const currentDate = new Date().toLocaleString();
+    const newNote = { id: nanoid(), text: text, date: currentDate };
+    setSavedNotes((prevNotes) => [...prevNotes, newNote]);
     setText('');
   };
 
@@ -35,7 +37,7 @@ const WebText = ({setSavedNotes, savedNotes}) => {
         <h2>Notes</h2>
         <ul>
           {savedNotes.map((n, index) => (
-            <li key={index}>{n}</li>
+            <li key={index}>{n.text}</li>
           ))}
         </ul>
       </div>

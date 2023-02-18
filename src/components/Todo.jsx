@@ -8,11 +8,9 @@ const Todo = () => {
     const [todos, setTodos] = useState(['test', 'testing2']);
     const [newTodo, setNewTodo] = useState();
     
-    useEffect( ()=> {
-        console.log("Rendering");
-      }, [todos])
+    useEffect( ()=> {}, [todos])
 
-    const changeInputData = (e) => {
+    const handleInputChange  = (e) => {
         setNewTodo(e.target.value);
     }
 
@@ -25,17 +23,16 @@ const Todo = () => {
         <>
             <h1>TodoList</h1>
             <form action="">
-                <input type="text" name="" onChange={changeInputData} placeholder='Add Todo'/>
+                <input type="text" name="" onChange={handleInputChange } placeholder='Add Todo'/>
                 <button onClick={addTodo}><AiOutlinePlus size={30} /></button>
                 <button>{<FaRegTrashAlt />}</button>
             </form>
             <ul>
-                {todos.map((todo, index) => (
-                    <List key={index} todos={todos} />
+                {todos.map((todo) => (
+                <List key={todo.id} todo={todo} />
                 ))}
             </ul>
-            <p>You have 2 todos</p>
-
+            <p>You have {todos.length} todos</p>
         </>
     )
 }

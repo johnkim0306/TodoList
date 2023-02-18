@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { nanoid } from 'nanoid';
 
 const synth = window.speechSynthesis;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -10,7 +11,7 @@ mic.lang = 'en-US'
 
 const  WebSpeech = ({setSavedNotes, savedNotes}) => {
   const [isListening, setIsListening] = useState(false);
-  const [note, setNote] = useState(null);
+  const [note, setNote] = useState('');
 
   useEffect(()=> {
     handleListen()
@@ -44,7 +45,10 @@ const  WebSpeech = ({setSavedNotes, savedNotes}) => {
   };
 
   const handleSaveNote = () => {
-    setSavedNotes([...savedNotes, note])
+    const currentDate = new Date().toLocaleString();
+    const newNote = { id: nanoid(), text: note, date: currentDate };
+    console.log(note);
+    setSavedNotes([...savedNotes, newNote])
     setNote('')
   }
 
@@ -67,7 +71,7 @@ const  WebSpeech = ({setSavedNotes, savedNotes}) => {
           <h2>Notes</h2>
           <ul>
             {savedNotes.map((n, index) => (
-              <li key={index}>{n}</li>
+              <li key={index}>{n.text}</li>
             ))}
           </ul>
         </div>

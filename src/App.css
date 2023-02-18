@@ -5,8 +5,11 @@
 }
 
 .container {
-  display: flex;
-  justify-content: space-evenly;
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px
 }
 
 .app__left {
