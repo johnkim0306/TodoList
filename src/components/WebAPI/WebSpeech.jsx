@@ -1,9 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { nanoid } from 'nanoid';
-import List from './List';
+import List from '../List';
 
-
-//const synth = window.speechSynthesis;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 const mic = new SpeechRecognition();
 mic.continuous = true
@@ -13,10 +11,6 @@ mic.lang = 'en-US'
 const  WebSpeech = ({setSavedNotes, savedNotes, handleDeleteNote}) => {
   const [isListening, setIsListening] = useState(false);
   const [note, setNote] = useState('');
-
-  useEffect(()=> {
-    handleListen()
-  }, [isListening])
 
   const handleListen = useCallback(() => {
     if(isListening) {
@@ -45,6 +39,10 @@ const  WebSpeech = ({setSavedNotes, savedNotes, handleDeleteNote}) => {
     };
   }, [isListening]);
 
+  useEffect(()=> {
+    handleListen()
+  }, [isListening, handleListen])
+
   const handleSaveNote = useCallback(() => {
     const currentDate = new Date().toLocaleString();
     const newNote = { id: nanoid(), text: note, date: currentDate };
@@ -58,7 +56,7 @@ const  WebSpeech = ({setSavedNotes, savedNotes, handleDeleteNote}) => {
       <div className="web__container">
         <div className="box">
           <h2>Current Note</h2>
-          {isListening ? <span>🎙️</span> : <span>🛑🎙️</span>}
+          <span>{isListening ? '🎙️' : '🛑🎙️'}</span>
           <button onClick={() => setIsListening(prevState => !prevState)}>
             {isListening ? 'Stop' : 'Start'}
           </button>

@@ -1,17 +1,15 @@
 import { useState, useEffect } from 'react';
 import { nanoid } from 'nanoid';
-
-import WebSpeech from './components/WebSpeech';
-import WebText from './components/WebText';
-import Header from './components/Header'; 
-import Todo from './components/Todo';
-import NotesList from './components/NotesList';
-import Search from './components/Search';
-import List from './components/List.jsx';
 import './App.css';
 
+import WebSpeech from './components/WebAPI/WebSpeech';
+import WebText from './components/WebAPI/WebText';
+import Header from './components/Header/Header'; 
+import NotesList from './components/NotesList';
+import Search from './components/Search';
+import Footer from './components/Footer/Footer';
+
 const App = () => {
-  const [newTodo, setNewTodo] = useState();
   const [modeCheck, setmodeCheck] = useState('false');
   const [savedNotes, setSavedNotes] = useState(() => {
     const cachedNotes = JSON.parse(localStorage.getItem('savedNotes'));
@@ -30,10 +28,6 @@ const App = () => {
   });
   const [searchText, setSearchText] = useState('');
   const [whiteMode, setwhiteMode] = useState(false);
-
-  const changeInputData = (e) => {
-    setNewTodo(e.target.value);
-  }
 
   const addNote = (text) => {
     const newNote = { id: nanoid(), text, date: `${new Date().toLocaleString()}` }
@@ -64,6 +58,7 @@ const App = () => {
         <div className="app__container">
           <div className="app__bottom">{modeCheck ? <WebSpeech savedNotes={savedNotes} setSavedNotes={setSavedNotes} handleDeleteNote={deleteNote} /> : <WebText savedNotes={savedNotes} setSavedNotes={setSavedNotes} handleDeleteNote={deleteNote} />}</div>
         </div>
+        <Footer/>
       </div>
     </div>
   )

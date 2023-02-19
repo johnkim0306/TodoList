@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { nanoid } from 'nanoid';
-import List from './List';
+import List from '../List';
 
 const synth = window.speechSynthesis;
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -29,6 +29,8 @@ const WebText = ({ setSavedNotes, savedNotes, handleDeleteNote }) => {
   };
 
   return (
+    <>
+    <h1>Voice Notes</h1>
     <div className="web__container">
       <div className="box">
         <h1>Speech Synthesis</h1>
@@ -44,6 +46,7 @@ const WebText = ({ setSavedNotes, savedNotes, handleDeleteNote }) => {
           </ul>
       </div>
     </div>
+    </>
   );
 }
 

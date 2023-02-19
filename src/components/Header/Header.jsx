@@ -1,5 +1,5 @@
 import React from 'react'
-import './Header.css'
+import './Header.scss'
 
 const Header = ({modeCheck, setmodeCheck, handleTogglewhiteMode}) => {
     let ModeValue = ['Listening Mode', 'Speaking Mode']

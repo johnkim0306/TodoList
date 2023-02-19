@@ -6,8 +6,6 @@ const List = ({id, text, date, handleDeleteNote}) => {
         <li>
             <div className='list'>
                 <p>{text}</p>
-                <input type="checkbox" />
-                <input type="hidden" />
                 <MdDeleteForever onClick={() => handleDeleteNote(id)} className='delete-icon' size= '1.3em' type='button'/>     
             </div>
         </li>
